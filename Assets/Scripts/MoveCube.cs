@@ -7,6 +7,8 @@ public class MoveCube : MonoBehaviour
     public float speed = 2f;
     public float sensitivity = 10f;
     public Vector2 turn;
+    public float minAngle = -45.0f;
+    public float maxAngle = 45.0f;
 
     // Update is called once per frame
     void Update()
@@ -39,6 +41,8 @@ public class MoveCube : MonoBehaviour
     {
         turn.x += Input.GetAxis("Mouse X") * sensitivity;
         turn.y += Input.GetAxis("Mouse Y") * sensitivity;
+
+        turn.y = Mathf.Clamp(turn.y, minAngle, maxAngle);
 
         transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
     }
